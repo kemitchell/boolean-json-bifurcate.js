@@ -1,11 +1,9 @@
 module.exports = bifurcate
 
 function bifurcate(argument) {
-  if (typeof argument === 'string') {
-    return argument }
-  else if ('not' in argument) {
+  if (negation(argument)) {
     return { not: bifurcate(argument.not) } }
-  else if ('and' in argument) {
+  else if (conjunction(argument)) {
     return argument.and
       .reverse()
       .reduce(function(last, conjunct) {
@@ -13,7 +11,7 @@ function bifurcate(argument) {
           last ?
             { and: [ bifurcate(conjunct), last ] } :
             bifurcate(conjunct) ) }) }
-  else if ('or' in argument) {
+  else if (disjunction(argument)) {
     return argument.or
       .reverse()
       .reduce(function(last, disjunct) {
@@ -22,6 +20,19 @@ function bifurcate(argument) {
             { or: [ bifurcate(disjunct), last ] } :
             bifurcate(disjunct) ) }) }
   else {
-    var error = new Error('Invalid Boolean JSON object')
-    error.object = argument
-    throw error } }
+    return argument } }
+
+function conjunction(argument) {
+  return (
+    typeof argument === 'object' &&
+    'and' in argument ) }
+
+function disjunction(argument) {
+  return (
+    typeof argument === 'object' &&
+    'or' in argument ) }
+
+function negation(argument) {
+  return (
+    typeof argument === 'object' &&
+    'not' in argument ) }

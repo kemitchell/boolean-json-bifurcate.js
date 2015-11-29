@@ -3,6 +3,10 @@ var assert = require('assert')
 var bifurcate = require('boolean-json-bifurcate')
 
 assert.deepEqual(
+  bifurcate({ and: [ 'p', 'q' ] }),
+  { and: [ 'p', 'q' ] })
+
+assert.deepEqual(
   bifurcate({ and: [ 'p', 'q', 'r', 's' ] }),
   { and: [ 'p', { and: [ 'q', { and: [ 'r', 's' ] } ] } ] })
 
