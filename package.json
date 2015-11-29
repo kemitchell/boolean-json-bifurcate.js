@@ -1,7 +1,7 @@
 {
   "name": "boolean-json-bifurcate",
   "description": "convert K-ary conjunctions and disjunctions to binary expressions",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Kyle E. Mitchell <kyle@kemitchell.com> (https://kemitchell.com/)",
   "devDependencies": {
     "defence-cli": "^1.0.1",
